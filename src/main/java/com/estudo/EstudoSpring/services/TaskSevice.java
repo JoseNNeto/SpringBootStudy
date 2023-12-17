@@ -1,5 +1,6 @@
 package com.estudo.EstudoSpring.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class TaskSevice {
     public Task findById(Long id) {
         Optional<Task> task = taskRepository.findById(id);
         return task.orElseThrow(() -> new RuntimeException("Task not found! ID: " + id + ", Type: " + Task.class.getName()));
+    }
+
+    public List<Task> findAllByUserId(Long userId){
+        List<Task> tasks = this.taskRepository.findByUserId(userId);
+        return tasks;
     }
 
     @Transactional
